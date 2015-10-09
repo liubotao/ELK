@@ -130,7 +130,7 @@ LogStash称这些格式为编码(codecs),LogStash本身支持很多不一样的�
 
 Tip: 当我们直接运行Logstash的时候 我们可以使用Ctril+c来停止LogStash服务
  
-### Logstash配置格式
+### 配置格式
 
 
 当你想添加事件消息处理管道时,Logstash的配置文件每一个组件有一个独立的分开的段,比如:
@@ -220,4 +220,117 @@ Tip: 当我们直接运行Logstash的时候 我们可以使用Ctril+c来停止Lo
         #...
      }
   
+### 设置为启动服务
 
+    #! /bin/sh
+	
+	# From The Logstash Book
+	# The original of this file can be found at: http://logstashbook.com/code/index.html
+	#
+	
+	### BEGIN INIT INFO
+	# Provides:          logstash
+	# Required-Start:    $remote_fs $syslog
+	# Required-Stop:     $remote_fs $syslog
+	# Default-Start:     2 3 4 5
+	# Default-Stop:      0 1 6
+	# Short-Description: Start daemon at boot time
+	# Description:       Enable service provided by daemon.
+	### END INIT INFO
+	
+	. /lib/lsb/init-functions
+	
+	name="logstash-central"
+	logstash_bin="/opt/logstash/bin/logstash"
+	logstash_conf="/etc/logstash/central.conf"
+	logstash_log="/var/log/logstash/central.log"
+	pid_file="/var/run/$name.pid"
+	cwd=`pwd`
+	
+	start () {
+			command="${logstash_bin} agent --verbose -f $logstash_conf --log $logstash_log"
+	
+			log_daemon_msg "Starting $name"
+			if start-stop-daemon --start --quiet --oknodo -d /opt/logstash/ --pidfile "$pid_file" -b -m -N 19 --exec $command; then
+					log_end_msg 0
+			else
+					log_end_msg 1
+			fi
+	}
+	
+	stop () {
+			log_daemon_msg "Stopping $name"
+			start-stop-daemon --stop --quiet --oknodo --pidfile "$pid_file"
+	}
+	
+	status () {
+			status_of_proc -p $pid_file "" "$name"
+	}
+	
+	case $1 in
+			start)
+					if status; then exit 0; fi
+					start
+					;;
+			stop)
+					stop
+					;;
+			reload)
+					stop
+					sleep 2
+					start
+					;;
+			restart)
+					stop
+					sleep 2
+					start
+					;;
+			status)
+					status && exit 0 || exit $?
+					;;
+			*)
+					echo "Usage: $0 {start|stop|restart|reload|status}"
+					exit 1
+					;;
+	esac
+	
+	exit 0
+	
+设置过程如下:
+
+    $ sudo cp logstash /etc/init.d/logstash
+    $ sudo chmod 755 /etc/init.d/logstash
+    $ sudo chown root:root /etc/init.d/logstash
+    
+接下来 我们可以初始化脚本让服务能够使用它
+
+    $ sudo update-rc.d logstash enable
+    $ sudo /etc/init.d/logstash start
+    * logstash is not running
+    * Staring logstash
+ 
+检查logstash服务是否开启
+
+    $ /etc/init.d/logstash status
+    * logstatsh is running
+    
+    
+### 使用Syslog
+
+
+### 高可用高性能
+
+
+*  Kafka - 作为接受数据的代理服务
+*  ElasticSearch - 搜索或者存储数据
+*  LogStash - 消息和索引信息
+
+下面是介绍的几点来提高这些组件高可用
+
+*   提供多个LogStash避免单点故障 
+*   在input和output处理过程中,尽量避免丢失数据 
+*   提供LogStash的性能
+
+Warnning:不是所有的性能参数调整方法都是适合你的系统,我们能提供基本的设置来提高Logstash的处理能来,但是在你实际项目里面你必须调整参数并且反复观察信息来确认这些参数调整是符合你需要的
+
+ 
