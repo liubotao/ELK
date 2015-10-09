@@ -82,8 +82,8 @@ Debian&Ubuntu
  
 现在我们获取一个配置文件然后运行LogStash    
  
-     $java -jar logstash.jar agent -v -f sample.conf 
-     
+     $/opt/logstash/bin/logstash agent -v -f /etc/logstash/logstash.conf 
+          
  Note: 每次修改LogStash配置都需要重启LogStash才能读取新的配置   
  
  我们使用java -jar命令来运行下载的包,我们还使用到一个agent标识来告诉LogStash作为最基础的代理运行, -v表示打开详细的日志信息,-f选项来指定LogStash配置文件地址  
