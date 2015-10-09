@@ -74,13 +74,13 @@ Debian&Ubuntu
   *  filters - 我们怎么操作和处理LogStash的信息流
   *  outputs - 我们将处理之后的信息流发往输出
   
-  在LogStash的世界里,信息流通过inputs组件输入,通过filters组件操作和转变数据流,最后通过outputs组件完成这次的处理 
+在LogStash的世界里,信息流通过inputs组件输入,通过filters组件操作和转变数据流,最后通过outputs组件完成这次的处理 
   
-  在LogStash内部每个组件都可以单独配置,比如，input模块,我们可以定义标准的stdin插件,LogStash就会接受标准STDIN输入,在output模块种我们可以配置相反的,stdout组件,它能输出事件到标准输出,在我们刚才配置种我们加上一个选项:debug 当前每个输出都可以看成一个json hash
+在LogStash内部每个组件都可以单独配置,比如，input模块,我们可以定义标准的stdin插件,LogStash就会接受标准STDIN输入,在output模块种我们可以配置相反的,stdout组件,它能输出事件到标准输出,在我们刚才配置种我们加上一个选项:debug 当前每个输出都可以看成一个json hash
   
- 运行LogStash代理   
+运行LogStash代理   
  
- 现在我们获取一个配置文件然后运行LogStash
+现在我们获取一个配置文件然后运行LogStash    
  
      $java -jar logstash.jar agent -v -f sample.conf 
      
@@ -90,7 +90,7 @@ Debian&Ubuntu
  
   我们可以使用-vv 参数看到更加详细的输出信息
   
-  LogStash会马上运行并且产生一条启动信息,他会告诉我们我们开启了插件，其输出如下:
+  LogStash会马上运行并且产生一条启动信息,他会告诉我们我们开启了插件，其输出如下:    
   
     Pipeline started {:level=>:info}
     Logstash startup completed
