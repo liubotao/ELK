@@ -79,7 +79,7 @@ kafka可以通过命令行客户端来进行输入,一行就是一个单独的�
  
        $ sudo cp /opt/kafka/config/server.properties /opt/kafka/config/server-1.properties
        $ sudo cp /opt/kafka/config/server.properties /opt/kafka/config/server-2.properties
-   修改这2给文件配置信息如下:
+   修改这文件配置信息如下:
    
        config/server-1.properties:
            broker.id=1
