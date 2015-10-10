@@ -53,25 +53,25 @@ Kafka是一个分布式，分区，多分片的日志服务。它提供了一个
 
 (3) 创建一个主题topic
 
-    sudo /opt/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+    $ sudo /opt/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
     Created topic "test"
  
  我们可以通过此命令查看创建的主题
 
-    sudo /opt/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+    $ sudo /opt/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
 
 (4) 生产者发送消息
 
 kafka可以通过命令行客户端来进行输入,一行就是一个单独的消息
 
-    sudo /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+    $ sudo /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
 	[2015-10-10 10:13:30,730] WARN Property topic is not valid (kafka.utils.VerifiableProperties)
 	this is a message
 	this is another message
 
 (5) 消费者消费消息
 
-     sudo /opt/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+     $ sudo /opt/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
     this is a message
     this is another message
     
