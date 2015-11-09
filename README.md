@@ -18,7 +18,4 @@ d2j-dex2jar.bat c:\user\qting\classes.dex c:\user\qting\ </br>
 *下载JD-GUI(反编译jar神器)，最新版下载链接[JD-GUI下载](http://www.softpedia.com/get/Programming/Debuggers-Decompilers-Dissasemblers/JD-GUI.shtml)</br>
 *解压之后，双击打开，直接把上一步得到的的classes-dex2jar.jar文件直接拖入JD-GUI里面，你就可以随意查看蜻蜓的源码了。</br>
 
-# Summary
 
-蜻蜓FM的Android程序员难道你们的节操都碎了么？？没有节操的你们确实很文艺--普罗米修斯，宙斯，还有阿波罗，你们是神一样的团队！
-史上最牛逼造假App蜻蜓FM神一般的数据造假手段，让投资人和广告主欲哭无泪，让中国整个互联网都涨姿势了。
